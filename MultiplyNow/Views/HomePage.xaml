@@ -78,15 +78,15 @@
                              HorizontalAlignment="Left"
                              SelectionChanged="MultiplicandTextBox_SelectionChanged"/>
 
-                    <TextBox x:Name="MultiplyerTextBox" 
+                    <TextBox x:Name="MultiplierTextBox" 
                              Grid.Row="1"
                              Grid.Column="0"
                              Margin="0,4,0,4"
-                             Header="Multiplyer"
+                             Header="Multiplier"
                              TextWrapping="Wrap"
-                             PlaceholderText="Enter multiplyer"
+                             PlaceholderText="Enter multiplier"
                              HorizontalAlignment="Left"
-                             SelectionChanged="MultiplyerTextBox_SelectionChanged"/>
+                             SelectionChanged="MultiplierTextBox_SelectionChanged"/>
 
                     <StackPanel Orientation="Horizontal"
                                 Margin="0,8,4,0"

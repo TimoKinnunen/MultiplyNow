@@ -70,11 +70,11 @@
 
                 <TextBlock Style="{StaticResource SubTitleTextBlockStyle}">Philosophical notation</TextBlock>
                 <TextBlock Style="{StaticResource BodyTextBlockStyle}">
-                    I prefer 'multiplicand * multiplyer = product' to 'multiplyer * multiplicand = product' after reading a website.
+                    I prefer 'multiplicand * multiplier = product' to 'multiplier * multiplicand = product' after reading a website.
                 </TextBlock>
                 <TextBlock Style="{StaticResource BodyTextBlockStyle}">
                     Five boys have each three marbles, how many marbles do they have together? And the answer is 5 * 3 = 15 marbles.
-                    Not 15 boys. Multiplyer is marbles and product is marbles. Multiplicand is boys.
+                    Not 15 boys. Multiplier is marbles and product is marbles. Multiplicand is boys.
                 </TextBlock>
                 <TextBlock Style="{StaticResource BodyTextBlockStyle}">
                     That's why first field is 'Multiplicand'.

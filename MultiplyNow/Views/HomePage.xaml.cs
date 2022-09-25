@@ -61,7 +61,7 @@ namespace MultiplyNow.Views
 
         private void SetPageContentStackPanelWidth()
         {
-            MultiplicandTextBox.Width = MultiplyerTextBox.Width = ProductTextBox.Width = ActualWidth -
+            MultiplicandTextBox.Width = MultiplierTextBox.Width = ProductTextBox.Width = ActualWidth -
                 PageContentScrollViewer.Margin.Left -
                 PageContentScrollViewer.Padding.Right;
         }
@@ -134,60 +134,60 @@ namespace MultiplyNow.Views
             }
             #endregion check multiplicand input 
 
-            #region check multiplyer input
-            string stringMultiplyer = MultiplyerTextBox.Text.Trim();
-            if (string.IsNullOrEmpty(stringMultiplyer))
+            #region check multiplier input
+            string stringMultiplier = MultiplierTextBox.Text.Trim();
+            if (string.IsNullOrEmpty(stringMultiplier))
             {
-                mainPage.NotifyUser("Multiplyer is missing.", NotifyType.ErrorMessage);
+                mainPage.NotifyUser("Multiplier is missing.", NotifyType.ErrorMessage);
                 return;
             }
 
-            StringBuilder multiplyerStringBuilder = new StringBuilder();
-            bool multiplyerCanAddDigit = false;
-            bool multiplyerHasDetectedMinusSign = false;
-            bool multiplyerHasMinusSign = false;
-            foreach (char character in stringMultiplyer)
+            StringBuilder multiplierStringBuilder = new StringBuilder();
+            bool multiplierCanAddDigit = false;
+            bool multiplierHasDetectedMinusSign = false;
+            bool multiplierHasMinusSign = false;
+            foreach (char character in stringMultiplier)
             {
-                if (!multiplyerHasDetectedMinusSign && !multiplyerCanAddDigit)
+                if (!multiplierHasDetectedMinusSign && !multiplierCanAddDigit)
                 {
                     if (character == '-')
                     {
-                        multiplyerHasMinusSign = true;
-                        multiplyerHasDetectedMinusSign = true;
+                        multiplierHasMinusSign = true;
+                        multiplierHasDetectedMinusSign = true;
                     }
                 }
                 if (char.IsDigit(character))
                 {
                     //remove leading zeroes
-                    if (!multiplyerCanAddDigit)
+                    if (!multiplierCanAddDigit)
                     {
                         if (character != '0')
                         {
-                            multiplyerCanAddDigit = true;
+                            multiplierCanAddDigit = true;
                         }
                     }
-                    if (multiplyerCanAddDigit)
+                    if (multiplierCanAddDigit)
                     {
-                        multiplyerStringBuilder.Append(character);
+                        multiplierStringBuilder.Append(character);
                     }
                 }
             }
-            if (multiplyerHasMinusSign)
+            if (multiplierHasMinusSign)
             {
-                multiplyerStringBuilder.Insert(0, '-');
+                multiplierStringBuilder.Insert(0, '-');
             }
-            stringMultiplyer = multiplyerStringBuilder.ToString();
+            stringMultiplier = multiplierStringBuilder.ToString();
 
-            if (MultiplyerTextBox.Text != stringMultiplyer)
+            if (MultiplierTextBox.Text != stringMultiplier)
             {
-                MultiplyerTextBox.Text = stringMultiplyer;
-                if (string.IsNullOrEmpty(stringMultiplyer))
+                MultiplierTextBox.Text = stringMultiplier;
+                if (string.IsNullOrEmpty(stringMultiplier))
                 {
-                    mainPage.NotifyUser("Multiplyer is missing.", NotifyType.ErrorMessage);
+                    mainPage.NotifyUser("Multiplier is missing.", NotifyType.ErrorMessage);
                     return;
                 }
             }
-            #endregion check multiplyer input 
+            #endregion check multiplier input 
 
             if (MultiplyButton.Content.ToString() == "Multiply")
             {
@@ -211,7 +211,7 @@ namespace MultiplyNow.Views
             try
             {
                 //add cancellationToken
-                await Task.Run(async () => stringProduct = await DoMultiplicationAsync(stringMultiplicand, stringMultiplyer), cancellationToken).ConfigureAwait(false);
+                await Task.Run(async () => stringProduct = await DoMultiplicationAsync(stringMultiplicand, stringMultiplier), cancellationToken).ConfigureAwait(false);
             }
             catch (TaskCanceledException tcex)
             {
@@ -247,11 +247,11 @@ namespace MultiplyNow.Views
 
         }
 
-        private Task<string> DoMultiplicationAsync(string stringMultiplicand, string stringMultiplyer)
+        private Task<string> DoMultiplicationAsync(string stringMultiplicand, string stringMultiplier)
         {
             BigInteger bigIntegerMultiplicand = BigInteger.Parse(stringMultiplicand);
-            BigInteger bigIntegerMultiplyer = BigInteger.Parse(stringMultiplyer);
-            BigInteger bigIntegerProduct = bigIntegerMultiplicand * bigIntegerMultiplyer;
+            BigInteger bigIntegerMultiplier = BigInteger.Parse(stringMultiplier);
+            BigInteger bigIntegerProduct = bigIntegerMultiplicand * bigIntegerMultiplier;
             return Task.FromResult(bigIntegerProduct.ToString());
         }
 
@@ -279,15 +279,15 @@ namespace MultiplyNow.Views
             }
         }
 
-        private void MultiplyerTextBox_SelectionChanged(object sender, RoutedEventArgs e)
+        private void MultiplierTextBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            if (MultiplyerTextBox.Text.Length == 1)
+            if (MultiplierTextBox.Text.Length == 1)
             {
-                MultiplyerTextBox.Header = string.Format("Multiplyer is {0} digit.", MultiplyerTextBox.Text.Length);
+                MultiplierTextBox.Header = string.Format("Multiplier is {0} digit.", MultiplierTextBox.Text.Length);
             }
             else
             {
-                MultiplyerTextBox.Header = string.Format("Multiplyer is {0} digits.", MultiplyerTextBox.Text.Length);
+                MultiplierTextBox.Header = string.Format("Multiplier is {0} digits.", MultiplierTextBox.Text.Length);
             }
         }
 
